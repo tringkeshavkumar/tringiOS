@@ -1,0 +1,32 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Upload the build to appcenter"
+  lane :upload_to_appcenter do
+    $filePath =  "./AppCenter_Builds/"+"tringiOS"+".ipa"
+
+	appcenter_upload(
+	  api_token: "705a31b952f2bcc092446324a57408ae3083de11",
+	  owner_name: "keshavkumar.c-tringapps.com",
+	  owner_type: "user", # Default is user - set to organization for appcenter organizations
+	  app_name: "tringiOS",
+	  file: $filePath,
+	  notify_testers: false # Set to false if you don't want to notify testers of your new release (default: `false`)
+	)
+  end
+end
